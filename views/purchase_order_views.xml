@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_order_inherit_multiple_form" model="ir.ui.view">
+            <field name="name">purchase.order.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']"
+                       position="before">
+                    <button name="multiple_products" string="Add Multiple Product" class="btn-primary" type="object"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_purchase_multiple_product_list" model="ir.ui.view">
+            <field name="name">product.purchase.multiple.product</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="1" edit="1">
+                    <header>
+                        <button string="Add To Po" type="object" name="add_to_po" context="{'current_id': active_id}"/>
+                    </header>
+                    <field name="name" readonly="True"/>
+                    <field name="product_template_variant_value_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="product_uom_qty"/>
+                    <field name="lst_price" readonly="True"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
